@@ -37,14 +37,6 @@ public class Movie implements Serializable {
   private Date inTopDate;
 
   public Movie() {
-    Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("UTC"));
-    calendar.set(Calendar.HOUR_OF_DAY, 0);
-    calendar.set(Calendar.MINUTE, 0);
-    calendar.set(Calendar.SECOND, 0);
-    calendar.set(Calendar.MILLISECOND, 0);
-    calendar.set(Calendar.ZONE_OFFSET, 0);
-
-    inTopDate = calendar.getTime();
   }
 
   public int getId() {

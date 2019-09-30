@@ -61,7 +61,7 @@ public class MovieDAOImpl implements MovieDAO {
     @Override
     public ArrayList<Date> getInTopDates() {
         Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
-        Query query = session.createQuery("SELECT DISTINCT m.inTopDate FROM Movie m");
+        Query query = session.createQuery("SELECT DISTINCT m.inTopDate FROM Movie m ORDER BY m.inTopDate ASC");
 
         return (ArrayList<Date>) query.list();
     }

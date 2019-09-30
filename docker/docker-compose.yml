@@ -6,8 +6,6 @@ services:
     build: .
     volumes:
       - ../build/libs/kinotop-0.1.war:/usr/local/tomcat/webapps/ROOT.war
-    ports:
-      - 8033:8080
 
   mysql_kt_java:
     ports:
