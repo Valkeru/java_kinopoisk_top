@@ -1,0 +1,23 @@
+version: '3.2'
+
+services:
+  tomcat:
+    image: tomcat:latest
+    volumes:
+      - ../build/libs/GradleSpring-0.1.war:/usr/local/tomcat/webapps/GradleSpring.war
+    ports:
+      - 8033:8080
+
+  mysql_kt_java:
+    ports:
+      - 33065:3306
+    image: mysql:5.7
+    volumes:
+      - mysql_kt_java_data:/var/lib/mysql
+    command: mysqld --sql-mode='' --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    environment:
+      - MYSQL_DATABASE=kinotop
+      - MYSQL_ALLOW_EMPTY_PASSWORD="yes"
+
+volumes:
+  mysql_kt_java_data: {}
