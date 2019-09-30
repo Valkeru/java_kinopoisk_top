@@ -18,10 +18,10 @@ public class Movie implements Serializable {
   @Column(nullable = false)
   private int position;
 
-  @Column(nullable = false)
+  @Column(nullable = false, name = "russian_name")
   private String russianName;
 
-  @Column
+  @Column(name = "original_name")
   private String originalName;
 
   @Column(nullable = false)
@@ -30,10 +30,10 @@ public class Movie implements Serializable {
   @Column(nullable = false)
   private float rating;
 
-  @Column(nullable = false)
+  @Column(nullable = false, name = "voters_count")
   private int votersCount;
 
-  @Column(nullable = false)
+  @Column(nullable = false, name = "in_top_date")
   private Date inTopDate;
 
   public Movie() {

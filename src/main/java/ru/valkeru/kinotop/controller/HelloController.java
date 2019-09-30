@@ -20,9 +20,10 @@ public class HelloController {
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String getIndex(Model model) {
         MovieService movieService = new MovieService();
-        ArrayList<Movie> movies = movieService.findAll();
+        ArrayList<Movie> movies = movieService.getTodayTop();
 
         model.addAttribute("movies", movies);
+        model.addAttribute("inTopDates", movieService.getInTopDates());
 
         return "index";
     }

@@ -21,28 +21,22 @@
             <label for="datepicker">Дата:</label>
             <select id="datepicker" onchange="window.location = '//${pageContext.request.serverName}:${pageContext.request.serverPort}<c:url
                     value="/datetop"/>?date=' + this.value">
-                <%
-                    Date date = new Date();
-                    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-                %>
-                <c:set var="current_date" value="<%= dateFormat.format(date) %>"/>
-                <option disabled <c:if test="${selected_date == null || movies.size() == 0}">selected</c:if>>
+                <option disabled
+                        <c:if test="${pageContext.request.getAttribute(\"date\") == null || movies.size() == 0}">selected</c:if>>
                     Выберите дату
                 </option>
-                <option value="${current_date}" <c:if test="${current_date.equals(selected_date)}"> selected </c:if>  >
+                <option value="<%=new SimpleDateFormat("yyyy-MM-dd").format(new Date())%>">
                     Сегодня
                 </option>
 
                 <c:forEach items="${inTopDates}" var="inTopDate">
-                    <c:if test="${!inTopDate.toLocaleString().equals(date.toLocaleString())}">
-                        <option value="<fmt:formatDate value="${inTopDate}" pattern="yyyy-MM-dd" />">
+                    <option value="<fmt:formatDate value="${inTopDate}" pattern="yyyy-MM-dd" />"
+                            <c:if test="${inTopDate.toGMTString().equals(date.toGMTString())}">selected</c:if> >
                             <fmt:formatDate value="${inTopDate}" pattern="yyyy-MM-dd" />
                         </option>
-                    </c:if>
                 </c:forEach>
             </select>
         </div>
-
 
         <table>
             <tr>

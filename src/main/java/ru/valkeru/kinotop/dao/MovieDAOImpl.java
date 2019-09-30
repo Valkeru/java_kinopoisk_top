@@ -51,6 +51,14 @@ public class MovieDAOImpl implements MovieDAO {
     }
 
     @Override
+    public ArrayList<Movie> getTodayTop() {
+        Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
+        Query query = session.createQuery("from Movie where inTopDate = current_date");
+
+        return (ArrayList<Movie>) query.list();
+    }
+
+    @Override
     public ArrayList<Date> getInTopDates() {
         Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
         Query query = session.createQuery("SELECT DISTINCT m.inTopDate FROM Movie m");

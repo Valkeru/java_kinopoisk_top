@@ -13,5 +13,7 @@ public interface MovieDAO {
 
     public ArrayList<Movie> findAllByDate(Date date);
 
+    public ArrayList<Movie> getTodayTop();
+
     public ArrayList<Date> getInTopDates();
 }

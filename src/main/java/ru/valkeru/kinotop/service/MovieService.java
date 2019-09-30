@@ -25,4 +25,8 @@ public class MovieService {
     public ArrayList<Date> getInTopDates() {
         return movieDAO.getInTopDates();
     }
+
+    public ArrayList<Movie> getTodayTop() {
+        return movieDAO.getTodayTop();
+    }
 }
