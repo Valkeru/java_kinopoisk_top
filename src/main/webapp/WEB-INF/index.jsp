@@ -1,5 +1,8 @@
+<%@ page import="java.util.Date" %>
+<%@ page import="java.text.SimpleDateFormat" %>
 <%@ page pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
 <html>
@@ -9,7 +12,6 @@
     <link rel="stylesheet" href="<c:url value="/resources/css/style.css" />">
 </head>
 <body>
-
 <div id="wrapper">
     <div id="container">
         <div id="welcome">
@@ -17,22 +19,27 @@
         </div>
         <div id="selector">
             <label for="datepicker">Дата:</label>
-<%--            <select id="datepicker" onchange="window.location = '{{ url('datetop') }}?date=' + this.value">--%>
-            <select id="datepicker" onchange="console.log('Test')">
-                {% set selected_date = app.request.query.get('date', date().format('Y-m-d')) %}
-                {% set current_date = date('now').format('Y-m-d') %}
-                <option disabled {% if selected_date is same as(null) or top|length is same as(0) %} selected {% endif
-                        %}>Выберите дату
+            <select id="datepicker" onchange="window.location = '//${pageContext.request.serverName}:${pageContext.request.serverPort}<c:url
+                    value="/datetop"/>?date=' + this.value">
+                <%
+                    Date date = new Date();
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                %>
+                <c:set var="current_date" value="<%= dateFormat.format(date) %>"/>
+                <option disabled <c:if test="${selected_date == null || movies.size() == 0}">selected</c:if>>
+                    Выберите дату
                 </option>
-                <option value="{{ current_date }}" {% if current_date is same as(selected_date) %} selected {% endif %}>
+                <option value="${current_date}" <c:if test="${current_date.equals(selected_date)}"> selected </c:if>  >
                     Сегодня
                 </option>
-                {% for date in dateList %}
-                {% set value = date.format('Y-m-d') %}
-                <option value="{{ value }}" {% if value is same as(selected_date) %} selected {% endif %}>{{
-                    date.format('d.m.Y') }}
-                </option>
-                {% endfor %}
+
+                <c:forEach items="${inTopDates}" var="inTopDate">
+                    <c:if test="${!inTopDate.toLocaleString().equals(date.toLocaleString())}">
+                        <option value="<fmt:formatDate value="${inTopDate}" pattern="yyyy-MM-dd" />">
+                            <fmt:formatDate value="${inTopDate}" pattern="yyyy-MM-dd" />
+                        </option>
+                    </c:if>
+                </c:forEach>
             </select>
         </div>
 

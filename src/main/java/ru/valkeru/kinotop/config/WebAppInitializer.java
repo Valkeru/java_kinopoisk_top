@@ -22,14 +22,4 @@ public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServlet
   protected String[] getServletMappings() {
     return new String[]{"/"};
   }
-
-  @Override
-  public void onStartup(ServletContext servletContext) throws ServletException {
-    super.onStartup(servletContext);
-
-    FilterRegistration.Dynamic fr = servletContext.addFilter("encodingFilter", new CharacterEncodingFilter());
-    fr.setInitParameter("encoding", "UTF-8");
-    fr.setInitParameter("forceEncoding", "true");
-    fr.addMappingForUrlPatterns(null, true, "/*");
-  }
 }

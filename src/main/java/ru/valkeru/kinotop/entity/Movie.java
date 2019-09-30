@@ -2,7 +2,9 @@ package ru.valkeru.kinotop.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.TimeZone;
 
 @Entity
 @Table(name = "movie")
@@ -35,7 +37,14 @@ public class Movie implements Serializable {
   private Date inTopDate;
 
   public Movie() {
-    inTopDate = new Date();
+    Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("UTC"));
+    calendar.set(Calendar.HOUR_OF_DAY, 0);
+    calendar.set(Calendar.MINUTE, 0);
+    calendar.set(Calendar.SECOND, 0);
+    calendar.set(Calendar.MILLISECOND, 0);
+    calendar.set(Calendar.ZONE_OFFSET, 0);
+
+    inTopDate = calendar.getTime();
   }
 
   public int getId() {

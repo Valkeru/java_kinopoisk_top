@@ -4,7 +4,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import ru.valkeru.kinotop.dbservice.DBService;
+import ru.valkeru.kinotop.service.MovieService;
 import ru.valkeru.kinotop.entity.Movie;
 
 import java.util.logging.Level;
@@ -21,7 +21,7 @@ class PageParser {
       int TOP_COUNT = 10;
 
       Document document = Jsoup.connect(TOP_URL).userAgent(USER_AGENT).get();
-      DBService dbService = new DBService();
+      MovieService movieService = new MovieService();
 
       for (int i = 1; i <= TOP_COUNT; i++) {
         String id = String.format("#top250_place_%d", i);
@@ -54,7 +54,7 @@ class PageParser {
             movie.setOriginalName(originalName);
           }
 
-          dbService.saveMovie(movie);
+          movieService.save(movie);
         }
       }
     } catch (Exception e) {
