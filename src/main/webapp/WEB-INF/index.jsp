@@ -19,7 +19,7 @@
         </div>
         <div id="selector">
             <label for="datepicker">Дата:</label>
-            <select id="datepicker" onchange="window.location = '//${pageContext.request.serverName}:${pageContext.request.serverPort}<c:url
+            <select id="datepicker" onchange="window.location = '//${pageContext.request.serverName}<c:url
                     value="/datetop"/>?date=' + this.value">
                 <option disabled
                         <c:if test="${pageContext.request.getAttribute(\"date\") == null || movies.size() == 0}">selected</c:if>>
