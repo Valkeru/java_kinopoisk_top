@@ -10,8 +10,8 @@
 
 При первом запуске выполняется импорт дампа в MySQL (содержит данные за 25-30 сентября 2019 года)
 
-Доступ к приложению: http://localhost:8005
-nginx-config/kinotop.conf - конфиг для Nginx на хосте.
+`nginx-config/kinotop.conf` - конфиг для Nginx на хосте.
+        
 1. Создать симлинк на конфиг в `/etc/nginx/sites-enabled/`
 2. `# echo '127.0.0.1       kinotop.local' >> /etc/hosts`
 3. `# systemctl restart nginx`

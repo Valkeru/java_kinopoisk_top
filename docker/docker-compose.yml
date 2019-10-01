@@ -4,8 +4,13 @@ services:
   tomcat_kt:
     container_name: tomcat_kinotop
     build: .
+    environment:
+      - JPDA_ADDRESS=8000
+    ports:
+      - 8000:8000
     volumes:
       - ../build/libs/kinotop-0.1.war:/usr/local/tomcat/webapps/ROOT.war
+    command: ['catalina.sh', 'jpda', 'run']
 
   mysql_kt_java:
     ports:
